@@ -7,7 +7,7 @@ public:
 	float directionX = 0.f;
 	float directionY = 0.f;
 
-	float speed = 2.f;
+	float speed = 200.f;
 	bool fired = false;
 
 	int damage = 5;
@@ -57,7 +57,7 @@ public:
 	/// Updates the bullets X and Y, also checks if still in frame
 	/// </summary>
 	/// <param name="cam">Camara</param>
-	void update(Camera& cam);
+	void update(Camera& cam, float dt);
 	/// <summary>
 	/// Stops the bullet
 	/// </summary>

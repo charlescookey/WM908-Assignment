@@ -92,11 +92,14 @@ int Bullet::nearestRoundInt(float f) {
 /// Updates the bullets X and Y, also checks if still in frame
 /// </summary>
 /// <param name="cam">Camara</param>
-void Bullet::update(Camera& cam) {
+void Bullet::update(Camera& cam ,float dt) {
 	if (!fired)return;
 
-	bullet.x += nearestRoundInt(directionX * speed);
-	bullet.y += nearestRoundInt(directionY * speed);
+	float move = static_cast<float>(speed);
+	move *= dt;
+
+	bullet.x += nearestRoundInt(directionX * move);
+	bullet.y += nearestRoundInt(directionY * move);
 
 	if (!cam.inbounds(bullet)) {
 		fired = false;
