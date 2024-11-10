@@ -138,6 +138,7 @@
     <ClInclude Include="ImageIndex.h" />
     <ClInclude Include="NumberDraw.h" />
     <ClInclude Include="Opponent.h" />
+    <ClInclude Include="Pickup.h" />
     <ClInclude Include="Plane.h" />
     <ClInclude Include="Rect.h" />
     <ClInclude Include="Shape.h" />
@@ -153,6 +154,7 @@
     <ClCompile Include="Hero.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Opponent.cpp" />
+    <ClCompile Include="Pickup.cpp" />
     <ClCompile Include="Plane.cpp" />
     <ClCompile Include="Rect.cpp" />
     <ClCompile Include="Tile.cpp" />
