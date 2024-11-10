@@ -23,10 +23,10 @@ int Camera::speed(int dir, int speed) {
 	if (dir > 0)return speed;
 	return speed * -1;
 }
-void Camera::update(int x, int y, Character& main) {
-
-	if (x != 0) WorldX += speed(x, main.movespeed);
-	if (y != 0) WorldY += speed(y, main.movespeed);
+void Camera::update(int x, int y, Character& main , float dt) {
+	int move = static_cast<int>(main.movespeed * dt);
+	if (x != 0) WorldX += speed(x, move);
+	if (y != 0) WorldY += speed(y, move);
 
 
 	WorldX = max(WorldX, 0);
@@ -77,7 +77,6 @@ void Camera::drawInCamera(GamesEngineeringBase::Window& canvas, Tile* p) {
 void Camera::drawInCamera(GamesEngineeringBase::Window& canvas, Character& p) {
 	int todrawX = p.main.x - WorldX;
 	int todrawY = p.main.y - WorldY;
-	gallery.drawAt(canvas, p.main.imageindex, p.imageOffset, todrawX, todrawY);
 
 	if (p.right)
 		gallery.drawAt(canvas, p.main.imageindex, p.imageOffset, todrawX, todrawY);

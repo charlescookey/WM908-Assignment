@@ -48,7 +48,7 @@ public:
 	/// <param name="x">Increment X</param>
 	/// <param name="y">incremnt Y</param>
 	/// <param name="main">Main Character</param>
-	void update(int x, int y, Character& main);
+	void update(int x, int y, Character& main, float dt);
 	/// <summary>
 	/// Draws a point in the Camera frame in Blue
 	/// </summary>

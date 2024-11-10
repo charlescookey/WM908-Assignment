@@ -20,11 +20,11 @@ std::string BulletManager::SaveBullet() {
 	return result;
 }
 
-void BulletManager::update(Camera& cam) {
+void BulletManager::update(Camera& cam , float dt) {
 
 	for (int i = 0; i < bullets.used; i++)
 		if (bullets[i]->fired) {
-			bullets[i]->update(cam);
+			bullets[i]->update(cam, dt);
 		}
 		else {
 			bullets.remove(i);

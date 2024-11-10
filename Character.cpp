@@ -1,5 +1,6 @@
 #include "Character.h"
 
+
 void Character::Death() {
 	//we can play a death animation;
 	//also can delete this class.

@@ -26,7 +26,7 @@ public:
 	/// Updates all bullets
 	/// </summary>
 	/// <param name="cam">Camera</param>
-	void update(Camera& cam);
+	void update(Camera& cam, float dt);
 	/// <summary>
 	/// Draws all bullets
 	/// </summary>
