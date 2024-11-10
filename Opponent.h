@@ -34,18 +34,18 @@ public:
 	/// <param name="_health">Health</param>
 	/// <param name="_imageindex">Image index</param>
 	/// <param name="_type">Opponent Type</param>
-	Opponent(int x, int y, int speed, int _health, ImageIndex _imageindex, int _type);
+	Opponent(int speed, int _health, ImageIndex _imageindex, int _type);
 	/// <summary>
 	/// Returns the speed to follow in specified direction
 	/// </summary>
 	/// <param name="a">1d Coordinate of Oppponet</param>
 	/// <param name="b">1d coordinate of Character to follow</param>
 	/// <returns>Speed</returns>
-	int followSpeed(int a, int b);
+	int followSpeed(int a, int b,float dt);
 	/// <summary>
 	/// Position to follow
 	/// </summary>
 	/// <param name="x">Position X</param>
 	/// <param name="y">Position Y</param>
-	void follow(int x, int y);
+	void follow(int x, int y, float dt);
 };

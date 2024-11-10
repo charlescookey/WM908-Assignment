@@ -21,25 +21,27 @@ std::string Opponent::SaveOpponent() {
 	return result;
 }
 
-Opponent::Opponent(int x, int y, int speed, int _health, ImageIndex _imageindex, int _type) {
+Opponent::Opponent(int speed, int _health, ImageIndex _imageindex, int _type) {
 	movespeed = speed;
 	maxHealth = _health;
 	currHealth = maxHealth;
 	type = _type;
 
 	imageindex = _imageindex;
-	main = Plane(x, y, imageindex);
+	main = Plane(0, 0, imageindex);
 }
 
-int Opponent::followSpeed(int a, int b) {
-	if (a > b)return movespeed;
-	else if (a < b)return -movespeed;
+int Opponent::followSpeed(int a, int b , float dt) {
+	int move = static_cast<int>(movespeed * dt);
+	if (a > b)return move;
+	else if (a < b)return -move;
 	else return 0;
 }
 
-void Opponent::follow(int x, int y) {
-	int movex = followSpeed(x, main.x);
-	int movey = followSpeed(y, main.y);
+void Opponent::follow(int x, int y , float dt) {
+	
+	int movex = followSpeed(x, main.x , dt);
+	int movey = followSpeed(y, main.y , dt);
 
 	update(movex, movey);
 	main.update(movex, movey);
