@@ -1,6 +1,6 @@
 #include "Hero.h"
 
-
+#include "DrawHelp.h"
 
 Hero::Hero(int x, int y) {
 	movespeed = 4;

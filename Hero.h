@@ -1,7 +1,7 @@
 #pragma once
 #include "Character.h"
 #include "Camera.h"
-#include "DrawHelp.h"
+
 
 class Hero :public Character {
 	//GamesEngineeringBase::Image* slashAnimations[34];
