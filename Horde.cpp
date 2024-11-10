@@ -24,6 +24,7 @@ void Horde::update(float dt, Camera& cam, Hero& hero) {
 		else {
 			p->setImageWidthAndHeight(cam.gallery.getImageWidthAndHeight(p->main.imageindex));
 			horde.add(p);
+
 		}
 		timeElapsed = 0.f;
 		frequency = max(1.0f, frequency - 0.1);
@@ -39,16 +40,13 @@ void Horde::update(float dt, Camera& cam, Hero& hero) {
 				shoot(dt, *horde[i], hero, cam);
 			}
 			else {
-				horde[i]->follow(posX, posY);
+				horde[i]->follow(posX, posY , dt);
 			}
 		}
 		else {
 			horde.remove(i);
 		}
-	//add else, remove from array;
-	//add else, remove from array;
-
-	NPCBullets.update(cam);
+	NPCBullets.update(cam,dt);
 };
 
 std::string Horde::SaveHorde() {
@@ -111,7 +109,6 @@ void Horde::collisionToHero(Hero& hero, Camera& cam) {
 		std::cout << "hero takes " << totalDamage << " from " << damagersCount << " enemies\n";
 		DamagetimeElapsed = 0.f;
 	}
-
 }
 
 void Horde::collisionToBullets(BulletManager& bullets, Hero& hero) {
@@ -142,7 +139,6 @@ void Horde::collisionNPCBulletsToHero(Hero& hero, Camera& cam) {
 			NPCBullets[j].stop();
 		}
 	}
-
 }
 
 void Horde::shoot(float dt, Opponent& start, Hero& hero, Camera& cam) {
@@ -203,11 +199,11 @@ void Horde::AreaofEffect(Hero& hero, Camera& cam) {
 Opponent* Horde::createNewEnemy(Camera& cam, int i) {
 
 	//just as a test			  cleric1.png
-	Opponent Brazy(0, 0, 2, 5, ImageIndex::CharacterCleric, 0);
-	Opponent Killer(0, 0, 2, 20, ImageIndex::CharacterWarrior, 1);
-	Opponent Robot(0, 0, 1, 10, ImageIndex::CharcaterMinoutaur, 2);
-	Opponent Shock(0, 0, 2, 15, ImageIndex::CharacterOrc, 3);
-	Opponent Stagnant(0, 0, 2, 15, ImageIndex::CharacterOrc, 4);
+	Opponent Brazy(120, 5, ImageIndex::CharacterCleric, 0);
+	Opponent Killer(100, 20, ImageIndex::CharacterWarrior, 1);
+	Opponent Robot(110, 10, ImageIndex::CharcaterMinoutaur, 2);
+	Opponent Shock(105, 15, ImageIndex::CharacterOrc, 3);
+	Opponent Stagnant(2, 15, ImageIndex::CharacterOrc, 4);
 
 	int index = rand() % 5;
 	int Y = 0;
@@ -223,7 +219,6 @@ Opponent* Horde::createNewEnemy(Camera& cam, int i) {
 		Y = cam.WorldY + (rand() % cam.height);
 		X = cam.WorldX + (rand() % cam.width);
 	}
-
 
 	std::string debugname = "Opponent" + std::to_string(i);
 
@@ -254,11 +249,11 @@ Opponent* Horde::createNewEnemy(Camera& cam, int i) {
 Opponent* Horde::createOldEnemy(int index, int X, int Y, std::string debugname) {
 
 	//just as a test			  cleric1.png
-	Opponent Brazy(0, 0, 2, 5, ImageIndex::CharacterCleric, 0);
-	Opponent Killer(0, 0, 2, 20, ImageIndex::CharacterWarrior, 1);
-	Opponent Robot(0, 0, 1, 10, ImageIndex::CharcaterMinoutaur, 2);
-	Opponent Shock(0, 0, 2, 15, ImageIndex::CharacterOrc, 3);
-	Opponent Stagnant(0, 0, 2, 15, ImageIndex::CharacterOrc, 4);
+	Opponent Brazy(120, 5, ImageIndex::CharacterCleric, 0);
+	Opponent Killer(100, 20, ImageIndex::CharacterWarrior, 1);
+	Opponent Robot(110, 10, ImageIndex::CharcaterMinoutaur, 2);
+	Opponent Shock(105, 15, ImageIndex::CharacterOrc, 3);
+	Opponent Stagnant(2, 15, ImageIndex::CharacterOrc, 4);
 
 	switch (index) {
 	case 0:
