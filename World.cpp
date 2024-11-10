@@ -20,8 +20,7 @@ void World::load(std::string filename) {
 	int tilenum;
 	std::string line;
 
-	//rows and col should be rerad from file;
-
+	//rows and col would be rerad from file;
 
 	arr = new int* [rows];
 	background = new Tile * [rows];
@@ -29,8 +28,6 @@ void World::load(std::string filename) {
 		arr[i] = new int[cols];
 		background[i] = new Tile[cols];
 	}
-	//infile >> tilenum;
-	//std::cout << tilenum << "\n";
 
 	int i = 0; int j = 0;
 	while (std::getline(infile, line)) {
@@ -52,7 +49,6 @@ void World::load(std::string filename) {
 		}
 	}
 	infile.close();
-
 }
 //make one with vec2;
 bool World::passable(int x, int y) {

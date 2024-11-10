@@ -44,16 +44,11 @@ void PickupManager::collisionToHero(Hero& hero, Camera& cam) {
 		if (pickups[i]->taken) {
 			pickups.remove(i);
 			continue;
-			//Not ideal ass last wont be checked
 		};
 		if (pickups[i]->pickup.collision(collisionX, collisionY, hero.main.width, hero.main.height)) {
 			hero.takePickup(pickups[i]->type);
 			pickups[i]->taken = true;
 			break;
-			///remove from 
-
-
 		}
 	}
-
 }
