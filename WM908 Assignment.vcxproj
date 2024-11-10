@@ -127,10 +127,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Circle.h" />
+    <ClInclude Include="DrawHelp.h" />
+    <ClInclude Include="Gallery.h" />
+    <ClInclude Include="GameArray.h" />
     <ClInclude Include="GamesEngineeringBase.h" />
+    <ClInclude Include="ImageIndex.h" />
+    <ClInclude Include="NumberDraw.h" />
+    <ClInclude Include="Plane.h" />
+    <ClInclude Include="Rect.h" />
+    <ClInclude Include="Shape.h" />
+    <ClInclude Include="Tile.h" />
+    <ClInclude Include="Vec2.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Circle.cpp" />
+    <ClCompile Include="Gallery.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Plane.cpp" />
+    <ClCompile Include="Rect.cpp" />
+    <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="Vec2.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
