@@ -137,15 +137,19 @@
     <ClInclude Include="GameArray.h" />
     <ClInclude Include="GamesEngineeringBase.h" />
     <ClInclude Include="Hero.h" />
+    <ClInclude Include="Horde.h" />
     <ClInclude Include="ImageIndex.h" />
+    <ClInclude Include="MenuSystem.h" />
     <ClInclude Include="NumberDraw.h" />
     <ClInclude Include="Opponent.h" />
     <ClInclude Include="Pickup.h" />
     <ClInclude Include="PickupManager.h" />
     <ClInclude Include="Plane.h" />
+    <ClInclude Include="Queue.h" />
     <ClInclude Include="Rect.h" />
     <ClInclude Include="Shape.h" />
     <ClInclude Include="Tile.h" />
+    <ClInclude Include="TimeDisplay.h" />
     <ClInclude Include="Vec2.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>
@@ -155,15 +159,21 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Circle.cpp" />
+    <ClCompile Include="DrawHelp.cpp" />
     <ClCompile Include="Gallery.cpp" />
     <ClCompile Include="Hero.cpp" />
+    <ClCompile Include="Horde.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MenuSystem.cpp" />
+    <ClCompile Include="NumberDraw.cpp" />
     <ClCompile Include="Opponent.cpp" />
     <ClCompile Include="Pickup.cpp" />
     <ClCompile Include="PickupManager.cpp" />
     <ClCompile Include="Plane.cpp" />
+    <ClCompile Include="Queue.cpp" />
     <ClCompile Include="Rect.cpp" />
     <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="TimeDisplay.cpp" />
     <ClCompile Include="Vec2.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
