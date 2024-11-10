@@ -1,8 +1,9 @@
 #pragma once
-#include "Tile.h"
 #include <fstream>
 #include <string>
 #include <sstream>
+
+#include "Tile.h"
 
 class World {
 	Tile** background{ nullptr };
