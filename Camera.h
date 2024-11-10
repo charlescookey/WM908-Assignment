@@ -3,13 +3,6 @@
 #include "World.h"
 #include "Character.h"
 
-
-/////define theese inside
-#define ScreenSizeX 1024
-#define ScreenSizeY 768
-#define WorldSizeX 3200
-#define WorldSizeY 3200
-
 class Camera {
 public:
 	Gallery gallery;

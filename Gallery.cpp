@@ -1,6 +1,6 @@
 #include "Gallery.h"
 
-
+#include <fstream>
 
 
 

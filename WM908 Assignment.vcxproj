@@ -127,11 +127,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="Character.h" />
     <ClInclude Include="Circle.h" />
     <ClInclude Include="DrawHelp.h" />
     <ClInclude Include="Gallery.h" />
     <ClInclude Include="GameArray.h" />
     <ClInclude Include="GamesEngineeringBase.h" />
+    <ClInclude Include="Hero.h" />
     <ClInclude Include="ImageIndex.h" />
     <ClInclude Include="NumberDraw.h" />
     <ClInclude Include="Plane.h" />
@@ -139,15 +142,20 @@
     <ClInclude Include="Shape.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="Vec2.h" />
+    <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Character.cpp" />
     <ClCompile Include="Circle.cpp" />
     <ClCompile Include="Gallery.cpp" />
+    <ClCompile Include="Hero.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Plane.cpp" />
     <ClCompile Include="Rect.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="Vec2.cpp" />
+    <ClCompile Include="World.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -110,7 +110,7 @@ void Hero::drawCollisionWithTerrain(GamesEngineeringBase::Window& canvas, World&
 
 
 //dont need canvas here
-bool Hero::collisionWithTerrain(GamesEngineeringBase::Window& canvas, World& ww, Camera& cam, int X, int Y) {
+bool Hero::collisionWithTerrain( World& ww, Camera& cam, int X, int Y) {
 
 	int moveSpeed = 5;
 

@@ -1,9 +1,7 @@
 #pragma once
-#include <fstream>
-#include <string>
-#include <sstream>
 
 #include "Tile.h"
+#include <string>
 
 class World {
 	Tile** background{ nullptr };
@@ -14,8 +12,7 @@ public:
 	/// <summary>
 	/// Default Constructor
 	/// </summary>
-	World() {
-	}
+	World();
 
 	int** arr;
 	/// <summary>

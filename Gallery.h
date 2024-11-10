@@ -3,7 +3,6 @@
 #include "Vec2.h"
 #include "GamesEngineeringBase.h"
 
-#include <fstream>
 
 class Gallery {
 public:

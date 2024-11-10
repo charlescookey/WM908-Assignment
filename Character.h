@@ -12,6 +12,7 @@ public:
 	bool alive = true;
 	int imageOffset = 0;
 
+
 	/// <summary>
 	/// Called when Charater Dies
 	/// </summary>
@@ -32,8 +33,7 @@ public:
 	/// </summary>
 	/// <param name="damage">Damage to reduce by</param>
 	void takeDamage(int damage);
-}
-	}
+
 	/// <summary>
 	/// Updates position by X and Y
 	/// </summary>
@@ -46,7 +46,7 @@ public:
 	/// <param name="canvas">Canvas to draw to</param>
 	/// <param name="gallery">Gallety to get Image from</param>
 	void draw(GamesEngineeringBase::Window& canvas, Gallery& gallery);
-	
+
 	/// <summary>
 	/// Draws the character at a specified position
 	/// </summary>
@@ -62,3 +62,4 @@ public:
 	/// <param name="X">Position X</param>
 	/// <param name="Y">Position Y</param>
 	void drawHealth(GamesEngineeringBase::Window& canvas, int X, int Y);
+};

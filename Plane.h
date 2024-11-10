@@ -1,8 +1,9 @@
 #pragma once
-#include <string>
 #include "Vec2.h"
 #include "ImageIndex.h"
 #include "GamesEngineeringBase.h"
+
+#include <string>
 
 class Plane {
 public:

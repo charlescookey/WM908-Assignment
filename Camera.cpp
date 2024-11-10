@@ -1,6 +1,13 @@
 #include "Camera.h"
 
 
+
+#define ScreenSizeX 1024
+#define ScreenSizeY 768
+#define WorldSizeX 3200
+#define WorldSizeY 3200
+
+
 Camera::Camera(int x, int y, int _width, int _height) {
 	WorldX = x;
 	WorldY = y;

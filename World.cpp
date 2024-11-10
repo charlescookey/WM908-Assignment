@@ -1,6 +1,10 @@
 #include "World.h"
 
 
+#include <fstream>
+#include <string>
+#include <sstream>
+
 World::World() {
 }
 
