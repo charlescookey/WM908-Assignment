@@ -27,13 +27,22 @@ void Vec2::printXY() {
     std::cout << "X is " << x << " Y is " << y << "\n";
 }
 
+/// <summary>
+/// Overloading the + operator to return the sum of two vectors
+/// </summary>
+/// <param name="addend">The vector to add</param>
+/// <returns>The sum of two vectors</returns>
 Vec2 Vec2::operator+ (const Vec2& addend) {
     Vec2 sum;
     sum.x = x + addend.x;
     sum.y = y + addend.y;
     return sum;
 }
-
+/// <summary>
+/// Overloading the - operator to return the difference between two vectors
+/// </summary>
+/// <param name="subend">The vector to subtract</param>
+/// <returns>The difference</returns>
 Vec2 Vec2::operator- (const Vec2& subend) {
     Vec2 difference;
     difference.x = x - subend.x;
