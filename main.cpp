@@ -37,13 +37,12 @@ float tempElapsedtime = 0;
 float areaElapsedtime = 0;
 
 void divine(Camera& cam, Hero& pp, Horde& hh, BulletManager& bullets, int moveX, int moveY, GamesEngineeringBase::Window& canvas, World& ww, float dt) {
-
 	if (pp.collisionWithTerrain(ww, cam, moveX, moveY)) {
 		pp.update(moveX, moveY);
-		cam.update(moveX, moveY, pp);
+		cam.update(moveX, moveY, pp , dt);
 	}
 
-	//we'd add functionality to make plaer not go through NPS
+	// add functionality to make plaer not go through NPS
 
 	/*hh.doArray([&pp](Opponent* a) {
 		if (a->main.collision(pp.main)) {
@@ -52,7 +51,7 @@ void divine(Camera& cam, Hero& pp, Horde& hh, BulletManager& bullets, int moveX,
 		}
 		});*/
 
-	hh.collisionToHero(pp, cam);
+	//hh.collisionToHero(pp, cam);
 
 	/*hh.doArray([&bullets](Opponent* a) {
 		for (int i = 0; i < bullets.used(); i++) {
@@ -219,6 +218,9 @@ int testTimer() {
 		X += 20;
 	}
 
+	Y += 30;
+
+
 	while (running)
 	{
 		// Check for input (key presses or window events)
@@ -232,6 +234,65 @@ int testTimer() {
 		canvas.present();
 	}
 	return 0;
+};
+
+void FPSandScore(GamesEngineeringBase::Window &canvas,float _FPS , int Score, int Scale) {
+	int FPS = static_cast<int>(_FPS);
+	int X = 20;
+	int Y = 20;
+
+	int ScoreDraw[9] = { 17,11,14,16,12,10,0,0,0 };
+	ScoreDraw[8] = Score % 10;
+	Score /= 10;
+	ScoreDraw[7] = Score % 10;
+	Score /= 10;
+	ScoreDraw[6] = Score % 10;
+
+	for (int i = 0; i < 9; i++) {
+		NumberDraw::drawNumberScaled(Scale, ScoreDraw[i], canvas, X, Y, 255, 255, 255);
+		X += (Scale * 5) + 1;
+	}
+
+	Y += (Scale * 7) + 5;
+	X = 20;
+
+	int FPSDraw[7] = { 13,15,17,10,0,0,0 };
+	FPSDraw[6] = FPS % 10;
+	FPS /= 10;
+	FPSDraw[5] = FPS % 10;
+	FPS /= 10;
+	FPSDraw[4] = FPS % 10;
+
+	for (int i = 0; i < 7; i++) {
+		NumberDraw::drawNumberScaled(Scale, FPSDraw[i], canvas, X, Y, 255, 255, 255);
+		X += 15;
+	}
+
+	//: = 10 ; c=11 ; e =12 ; f=13 ; o =14 ; p=15 ; r=16 ; s = 17
+	//NumberDraw::drawNumberScaled(2, 17, canvas, X, Y, 255, 255, 255);
+	//X += 15;
+	//NumberDraw::drawNumberScaled(2, 11, canvas, X, Y, 255, 255, 255);
+	//X += 15;
+	//NumberDraw::drawNumberScaled(2, 14, canvas, X, Y, 255, 255, 255);
+	//X += 15;
+	//NumberDraw::drawNumberScaled(2, 16, canvas, X, Y, 255, 255, 255);
+	//X += 15;
+	//NumberDraw::drawNumberScaled(2, 12, canvas, X, Y, 255, 255, 255);
+	//X += 15;
+	//NumberDraw::drawNumberScaled(2, 10, canvas, X, Y, 255, 255, 255);
+
+
+	//Y += 30;
+	//X = 20;
+
+	//NumberDraw::drawNumberScaled(2, 13, canvas, X, Y, 255, 255, 255);
+	//X += 15;
+	//NumberDraw::drawNumberScaled(2, 15, canvas, X, Y, 255, 255, 255);
+	//X += 15;
+	//NumberDraw::drawNumberScaled(2, 17, canvas, X, Y, 255, 255, 255);
+	//X += 15;
+	//NumberDraw::drawNumberScaled(2, 10, canvas, X, Y, 255, 255, 255);
+
 };
 
 
@@ -263,6 +324,7 @@ int fixedLevel(GamesEngineeringBase::Window& canvas, bool loadlastSave) {
 	int frameCount = 0;
 	float FPStimeELapsed = 0.f;
 	int nextScoreLevel = 100;
+	float FPS = 0.f;
 	while (running)
 	{
 		// Check for input (key presses or window events)
@@ -279,14 +341,16 @@ int fixedLevel(GamesEngineeringBase::Window& canvas, bool loadlastSave) {
 		}
 
 		float dt = tim.dt();
-		int move = static_cast<int>(500.f * dt);
+		int move = static_cast<int>(100.f * dt);
+
+		std::cout << move << "\n";
 
 		timedisplay.update(dt);
 
 		FPStimeELapsed += dt;
 		frameCount++;
 		if (FPStimeELapsed > 1.f) {
-			float FPS = frameCount / FPStimeELapsed;
+			FPS = frameCount / FPStimeELapsed;
 			std::cout << "FPS: " << FPS << "\n";
 			FPStimeELapsed = 0;
 			frameCount = 0;
@@ -318,7 +382,7 @@ int fixedLevel(GamesEngineeringBase::Window& canvas, bool loadlastSave) {
 			}
 		}
 
-		bullets.update(cam);
+		bullets.update(cam, dt);
 		horde.update(dt, cam, hero);
 
 		divine(cam, hero, horde, bullets, x, y, canvas, bb, dt);
@@ -335,6 +399,9 @@ int fixedLevel(GamesEngineeringBase::Window& canvas, bool loadlastSave) {
 		pickups.draw(canvas, cam);
 
 		timedisplay.draw(canvas);
+		hero.drawCollisionWithTerrain(canvas, bb, cam, x, y);
+
+		FPSandScore(canvas, FPS, hero.getScore(), 2);
 
 		// Display the frame on the screen. This must be called once the frame is finished in order to display the frame.
 		canvas.present();
