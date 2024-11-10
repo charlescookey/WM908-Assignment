@@ -17,6 +17,11 @@ public:
 	int width;
 	int height;
 
+	int ScreenSizeX = 1024;
+	int ScreenSizeY = 768;
+	int WorldSizeX = 3200;
+	int WorldSizeY = 3200;
+
 	/// <summary>
 	/// Constructor with Speicied start positon, width and height
 	/// </summary>
