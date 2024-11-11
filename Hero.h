@@ -63,34 +63,18 @@ public:
 	/// <returns>true if collision</returns>
 
 	bool collisionWithTerrain(World& ww, Camera& cam, int X, int Y);
+		
+	/// <summary>
+	/// Checks of colliding with Terrain Position
+	/// </summary>
+	/// <param name="canvas">canavs to draw to</param>
+	/// <param name="ww">World</param>
+	/// <param name="cam">Camera</param>
+	/// <param name="X">Terrain X</param>
+	/// <param name="Y">Terrain Y</param>
+	/// <returns>true if collision</returns>
 
-	/*
-	void slashCoolDown(float dt) {
-		timeElapsed += dt;
-
-		if (timeElapsed > slashCooldown) {
-			slashCheck = !slashCheck;
-			int animationFrames = 0;
-			timeElapsed = 0.f;
-
-		}
-	}
-
-	void slashAnimation(GamesEngineeringBase::Window& canvas) {
-		if (!slashCheck) {
-			return;
-		}
-
-		if (right) {
-			slash.drawAt(canvas, main.x + 64, main.y -10);
-		}
-		else
-			slash.backDrawAt(canvas, main.x - 64, main.y-10);
-
-		animationFrames++;
-		slash.sprite = *slashAnimations[(animationFrames/2) % 34];
-	};*/
-
+	bool collisionWithTerrainInfinite(World& ww, Camera& cam, int X, int Y);
 
 	int cirleFrames = 0;
 	bool drawArea = false;

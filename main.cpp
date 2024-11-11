@@ -42,25 +42,7 @@ void divine(Camera& cam, Hero& pp, Horde& hh, BulletManager& bullets, int moveX,
 		cam.update(moveX, moveY, pp , dt);
 	}
 
-	// add functionality to make plaer not go through NPS
-
-	/*hh.doArray([&pp](Opponent* a) {
-		if (a->main.collision(pp.main)) {
-			pp.takeDamage(a->damage);
-			return true;
-		}
-		});*/
-
-	//hh.collisionToHero(pp, cam);
-
-	/*hh.doArray([&bullets](Opponent* a) {
-		for (int i = 0; i < bullets.used(); i++) {
-			if (bullets[i].fired && a->main.collision(bullets[i].bullet)) {
-				a->takeDamage(bullets[i].damage);
-				bullets[i].stop();
-			}
-		}
-		});*/
+	hh.collisionToHero(pp, cam);
 
 	hh.collisionToBullets(bullets, pp);
 
@@ -84,23 +66,54 @@ void divine(Camera& cam, Hero& pp, Horde& hh, BulletManager& bullets, int moveX,
 
 		tempElapsedtime = 0.f;
 	}
+}
 
+void divineInfinite(Camera& cam, Hero& pp, Horde& hh, BulletManager& bullets, int moveX, int moveY, GamesEngineeringBase::Window& canvas, World& ww, float dt) {
+	if (pp.collisionWithTerrainInfinite(ww, cam, moveX, moveY)) {
+		pp.update(moveX, moveY);
+		cam.updateInfinte(moveX, moveY, pp, dt);
+	}
 
+	hh.collisionToHero(pp, cam);
+
+	hh.collisionToBullets(bullets, pp);
+
+	hh.collisionNPCBulletsToHero(pp, cam);
+
+	float max = 0;
+
+	int TargetX = INT_MIN;
+	int TargetY = INT_MIN;
+
+	hh.closestToHero(pp, cam, TargetX, TargetY);
+
+	tempElapsedtime += dt;
+	//tempElapsedtime = dt;
+
+	if (tempElapsedtime > 1.f && TargetX != INT_MIN) {
+		Bullet* bull = new Bullet();
+		bull->getDirection(pp, cam, TargetX, TargetY);
+		bull->setImageWidthAndHeight(cam.gallery.getImageWidthAndHeight(bull->bullet.imageindex));
+		bullets.add(bull);
+
+		tempElapsedtime = 0.f;
+	}
 }
 
 
-void saveAll(Camera& cam, Hero& pp, Horde& hh, BulletManager& bullets) {
+void saveAll(Camera& cam, Hero& pp, Horde& hh, BulletManager& bullets , TimeDisplay& time) {
 	std::string fileOutput;
 	fileOutput += cam.SaveCamera();
 	fileOutput += pp.SaveHero();
-	fileOutput += hh.SaveHorde();
 	fileOutput += bullets.SaveBullet();
+	fileOutput += hh.SaveHorde();
+	fileOutput += hh.NPCBullets.SaveBullet();
+	fileOutput += time.SaveTime();
 
 	std::ofstream outfile("saveOutput.txt");
 
 	outfile.write(fileOutput.c_str(), fileOutput.size());
 	outfile.close();
-
 }
 
 void splitLine(std::string input) {
@@ -134,10 +147,31 @@ bool addtoHorde(Horde& hh, std::string line, Camera& cam) {
 	return true;
 }
 
-void loadFromFile(std::string filename, Camera& cam, Hero& hero, Horde& hh, BulletManager& bullets) {
+bool addtoBulletsManager(BulletManager& bullets, std::string line, Camera& cam) {
+	std::stringstream ssin(line);
+	int X, Y, currHealth;
+	float dirX = 0.f, dirY = 0.f;
+	std::string name;
+	ssin >> name;
+	if (name != "Bullet:")return false;
+	ssin >> dirX;
+	ssin >> dirY;
+	ssin >> X;
+	ssin >> Y;
+
+	Bullet* bull = new Bullet();
+	bull->setImageWidthAndHeight(cam.gallery.getImageWidthAndHeight(bull->bullet.imageindex));
+	bull->setProperties(dirX, dirY, X, Y);
+	bullets.add(bull);
+	return true;
+}
+
+void loadFromFile(std::string filename, Camera& cam, Hero& hero, Horde& hh, BulletManager& bullets , TimeDisplay& time) {
 	std::ifstream infile;
 	infile.open(filename);
 	std::string line;
+	int tempInt = 0;
+	float tempFloat = 0;
 
 	// assume file is open
 	while (std::getline(infile, line)) {
@@ -157,10 +191,22 @@ void loadFromFile(std::string filename, Camera& cam, Hero& hero, Horde& hh, Bull
 			ssin >> hero.currHealth;
 			ssin >> hero.areaAttack;
 			ssin >> hero.topNEnemy;
+			ssin >> tempInt;
+			hero.addToScore(tempInt);
 		}
 		else if (temp == "Horde:") {
 			while (std::getline(infile, line)) {
 				if (!addtoHorde(hh, line, cam))break;
+
+			}
+		}
+		else if (temp == "Time:") {
+			ssin >> tempFloat;
+			time.setSeconds(tempFloat);
+		}
+		else if (temp == "Bullets:") {
+			while (std::getline(infile, line)) {
+				if (!addtoBulletsManager(bullets, line, cam))break;
 
 			}
 		}
@@ -267,43 +313,18 @@ void FPSandScore(GamesEngineeringBase::Window &canvas,float _FPS , int Score, in
 		NumberDraw::drawNumberScaled(Scale, FPSDraw[i], canvas, X, Y, 255, 255, 255);
 		X += 15;
 	}
-
-	//: = 10 ; c=11 ; e =12 ; f=13 ; o =14 ; p=15 ; r=16 ; s = 17
-	//NumberDraw::drawNumberScaled(2, 17, canvas, X, Y, 255, 255, 255);
-	//X += 15;
-	//NumberDraw::drawNumberScaled(2, 11, canvas, X, Y, 255, 255, 255);
-	//X += 15;
-	//NumberDraw::drawNumberScaled(2, 14, canvas, X, Y, 255, 255, 255);
-	//X += 15;
-	//NumberDraw::drawNumberScaled(2, 16, canvas, X, Y, 255, 255, 255);
-	//X += 15;
-	//NumberDraw::drawNumberScaled(2, 12, canvas, X, Y, 255, 255, 255);
-	//X += 15;
-	//NumberDraw::drawNumberScaled(2, 10, canvas, X, Y, 255, 255, 255);
-
-
-	//Y += 30;
-	//X = 20;
-
-	//NumberDraw::drawNumberScaled(2, 13, canvas, X, Y, 255, 255, 255);
-	//X += 15;
-	//NumberDraw::drawNumberScaled(2, 15, canvas, X, Y, 255, 255, 255);
-	//X += 15;
-	//NumberDraw::drawNumberScaled(2, 17, canvas, X, Y, 255, 255, 255);
-	//X += 15;
-	//NumberDraw::drawNumberScaled(2, 10, canvas, X, Y, 255, 255, 255);
-
 };
-
 
 int fixedLevel(GamesEngineeringBase::Window& canvas, bool loadlastSave) {
 	GamesEngineeringBase::Timer tim;
 	bool running = true; // Variable to control the main loop's running state.
 
-	Camera cam(0, 0, 1024, 768);
+	Camera cam(512, 512, 1024, 768 , 132, 132);
 
-	World bb;
-	bb.load("world_matrix.txt"); // her should set thje world constaints
+	World bb(132,132);
+	bb.load("world_fixed.txt"); // her should set thje world constaints
+
+	
 
 	Hero hero(canvas.getWidth() / 2, canvas.getHeight() / 2);
 	hero.setImageWidthAndHeight(cam.gallery.getImageWidthAndHeight(hero.main.imageindex));
@@ -318,7 +339,7 @@ int fixedLevel(GamesEngineeringBase::Window& canvas, bool loadlastSave) {
 	float time = 0.f;
 
 	if (loadlastSave) {
-		loadFromFile("saveOutput.txt", cam, hero, horde, bullets);
+		loadFromFile("saveOutput.txt", cam, hero, horde, bullets, timedisplay);
 	}
 
 	int frameCount = 0;
@@ -333,10 +354,8 @@ int fixedLevel(GamesEngineeringBase::Window& canvas, bool loadlastSave) {
 		canvas.clear();
 		// Update game logic
 
-		if (canvas.keyPressed(VK_ESCAPE)) break;
-
-		if (canvas.keyPressed('X')) {
-			saveAll(cam, hero, horde, bullets);
+		if (canvas.keyPressed(VK_ESCAPE)) {
+			saveAll(cam, hero, horde, bullets, timedisplay);
 			break;
 		}
 
@@ -410,6 +429,112 @@ int fixedLevel(GamesEngineeringBase::Window& canvas, bool loadlastSave) {
 }
 
 
+int infiniteLevel(GamesEngineeringBase::Window& canvas) {
+	GamesEngineeringBase::Timer tim;
+	bool running = true; // Variable to control the main loop's running state.
+
+	Camera cam(0, 0, 1024, 768);
+
+	World bb;
+	bb.load("world_matrix.txt"); // her should set thje world constaints
+
+	Hero hero(canvas.getWidth() / 2, canvas.getHeight() / 2);
+	hero.setImageWidthAndHeight(cam.gallery.getImageWidthAndHeight(hero.main.imageindex));
+
+	Horde horde;
+	BulletManager bullets;
+	PickupManager pickups;
+
+	TimeDisplay timedisplay(487, 20, 2);
+
+	int frameSkip = 0;
+	float time = 0.f;
+
+
+	int frameCount = 0;
+	float FPStimeELapsed = 0.f;
+	int nextScoreLevel = 100;
+	float FPS = 0.f;
+	while (running)
+	{
+		// Check for input (key presses or window events)
+		canvas.checkInput();
+		// Clear the window for the next frame rendering
+		canvas.clear();
+		// Update game logic
+
+		if (canvas.keyPressed(VK_ESCAPE)) break;
+
+		float dt = tim.dt();
+		int move = static_cast<int>(100.f * dt);
+
+		std::cout << move << "\n";
+
+		timedisplay.update(dt);
+
+		FPStimeELapsed += dt;
+		frameCount++;
+		if (FPStimeELapsed > 1.f) {
+			FPS = frameCount / FPStimeELapsed;
+			std::cout << "FPS: " << FPS << "\n";
+			FPStimeELapsed = 0;
+			frameCount = 0;
+		}
+
+		if (hero.getScore() >= nextScoreLevel) {
+			int Y = cam.WorldY + (rand() % cam.height);
+			int X = cam.WorldX + (rand() % cam.width);
+			std::cout << "New Pickup has been added at" << X << " " << Y << "\n";
+			nextScoreLevel += 100;
+			Pickup* pickup = new Pickup(3, X, Y);
+			pickup->setImageWidthAndHeight(cam.gallery.getImageWidthAndHeight(pickup->pickup.imageindex));
+			pickups.add(pickup);
+		}
+
+		int x = 0;
+		int y = 0;
+		if (canvas.keyPressed('W')) y -= move;
+		if (canvas.keyPressed('S'))  y += move;
+		if (canvas.keyPressed('A')) x -= move;
+		if (canvas.keyPressed('D')) x += move;
+
+		areaElapsedtime += dt;
+		if (canvas.keyPressed('F')) {
+			if (areaElapsedtime > 2.f) {
+				horde.AreaofEffect(hero, cam);
+				areaElapsedtime = 0.f;
+				hero.drawArea = true;
+			}
+		}
+
+		bullets.update(cam, dt);
+		horde.update(dt, cam, hero);
+
+		divineInfinite(cam, hero, horde, bullets, x, y, canvas, bb, dt);
+		pickups.collisionToHero(hero, cam);
+
+		// Draw(); 
+
+		cam.drawBackgroundInfinte(canvas, bb);
+		hero.drawAreaofEffect(canvas);
+		horde.draw(canvas, cam);
+		hero.draw(canvas, cam.gallery);
+		//hero.slashAnimation(canvas);
+		bullets.draw(canvas, cam);
+		pickups.draw(canvas, cam);
+
+		timedisplay.draw(canvas);
+		//hero.drawCollisionWithTerrain(canvas, bb, cam, x, y);
+
+		FPSandScore(canvas, FPS, hero.getScore(), 2);
+
+		// Display the frame on the screen. This must be called once the frame is finished in order to display the frame.
+		canvas.present();
+	}
+	return 0;
+}
+
+
 
 int LevelSelector(int index, GamesEngineeringBase::Window& canvas) {
 	switch (index) {
@@ -417,9 +542,10 @@ int LevelSelector(int index, GamesEngineeringBase::Window& canvas) {
 		fixedLevel(canvas, false);
 		break;
 	case 1:
-		fixedLevel(canvas, true);
+		infiniteLevel(canvas);
 		break;
 	case 2:
+		fixedLevel(canvas, true);
 		break;
 	case 3:
 		return -1;
@@ -443,7 +569,6 @@ int main() {
 	GamesEngineeringBase::Image Backimage;
 	Backimage.load("UI/TitleScreen.png");
 
-	TimeDisplay timedisplay(487, 20, 2);
 
 	while (running)
 	{
@@ -453,12 +578,10 @@ int main() {
 		canvas.clear();
 		// Update game logic
 
-		if (canvas.keyPressed(VK_ESCAPE)) break;
-
 		DrawHelp::drawPlainBackground(canvas, 0, 0, 0);
 
 		float dt = tim.dt();
-		timedisplay.update(dt);
+
 
 		bool ButtonPressed = false;
 		if (canvas.keyPressed('W')) {
@@ -478,7 +601,7 @@ int main() {
 		DrawHelp::drawImage(canvas, Backimage, 0, 0);
 		menu.draw(canvas);
 
-		timedisplay.draw(canvas);
+
 
 		// Display the frame on the screen. This must be called once the frame is finished in order to display the frame.
 		canvas.present();

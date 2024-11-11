@@ -30,6 +30,8 @@ public:
 	/// <param name="_width">Camera Width</param>
 	/// <param name="_height">Camera Height</param>
 	Camera(int x, int y, int _width, int _height);
+
+	Camera(int x, int y, int _width, int _height , int wx , int wy);
 	/// <summary>
 	/// Save Camera
 	/// </summary>
@@ -49,6 +51,13 @@ public:
 	/// <param name="y">incremnt Y</param>
 	/// <param name="main">Main Character</param>
 	void update(int x, int y, Character& main, float dt);
+	/// <summary>
+	/// Updates the main character in infinite space
+	/// </summary>
+	/// <param name="x">Increment X</param>
+	/// <param name="y">incremnt Y</param>
+	/// <param name="main">Main Character</param>
+	void updateInfinte(int x, int y, Character& main, float dt);
 	/// <summary>
 	/// Draws a point in the Camera frame in Blue
 	/// </summary>
@@ -80,6 +89,13 @@ public:
 	void drawInCamera(GamesEngineeringBase::Window& canvas, Tile& p);
 
 	/// <summary>
+	/// Draw a Tile Reference in camera
+	/// </summary>
+	/// <param name="canvas">canavs to draw to</param>
+	/// <param name="p">Tile reference</param>
+	void drawInCameraInfinite(GamesEngineeringBase::Window& canvas, Tile& p);
+
+	/// <summary>
 	/// Draw a Plane Pointer in camera
 	/// </summary>
 	/// <param name="canvas">canavs to draw to</param>
@@ -109,10 +125,31 @@ public:
 	/// <param name="canvas">canavs to draw to</param>
 	/// <param name="p">World reference</param>
 	void drawBackground(GamesEngineeringBase::Window& canvas, World& world);
+
+	/// <summary>
+	/// Draw a World Reference in camera in an infinte level
+	/// </summary>
+	/// <param name="canvas">canavs to draw to</param>
+	/// <param name="p">World reference</param>
+	void drawBackgroundInfinte(GamesEngineeringBase::Window& canvas, World& world);
 	/// <summary>
 	/// Check if inside camera frame
 	/// </summary>
 	/// <param name="plane">Plane to check</param>
 	/// <returns>true if inside</returns>
 	bool inbounds(Plane& plane);
+
+	/// <summary>
+	/// Gets the infinite location
+	/// </summary>
+	/// <param name="x"></param>
+	/// <returns></returns>
+	int InfiniteX(int x);
+	
+	/// <summary>
+	/// Gets the infinite location
+	/// </summary>
+	/// <param name="x"></param>
+	/// <returns></returns>
+	int InfiniteY(int y);
 };

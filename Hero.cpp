@@ -20,7 +20,7 @@ Hero::Hero(int x, int y) {
 
 std::string Hero::SaveHero() {
 	std::string result;
-	result += "Hero: " + std::to_string(main.x) + " " + std::to_string(main.y) + " " + std::to_string(currHealth) + " " + std::to_string(areaAttack) + " " + std::to_string(topNEnemy) + "\n";
+	result += "Hero: " + std::to_string(main.x) + " " + std::to_string(main.y) + " " + std::to_string(currHealth) + " " + std::to_string(areaAttack) + " " + std::to_string(topNEnemy) + " " + std::to_string(score) + "\n";
 	return result;
 
 }
@@ -129,6 +129,57 @@ bool Hero::collisionWithTerrain( World& ww, Camera& cam, int X, int Y) {
 	int rightX = main.x + cam.WorldX + 10;// -moveSpeed;
 	int right1y = main.y + cam.WorldY + 10;
 	int right2Y = main.y + cam.WorldY + 50;
+
+	if (Y < 0 && !ww.passable(upX, upY))
+		return false;
+
+
+	if (Y > 0 && !ww.passable(downX, downY))
+		return false;
+
+
+	if (X > 0 && !ww.passable(leftX, left1Y))
+		return false;
+
+	if (X > 0 && !ww.passable(leftX, left2Y))
+		return false;
+
+	if (X < 0 && !ww.passable(rightX, right1y))
+		return false;
+
+	if (X < 0 && !ww.passable(rightX, right2Y))
+		return false;
+}
+
+bool Hero::collisionWithTerrainInfinite( World& ww, Camera& cam, int X, int Y) {
+
+	int moveSpeed = 5;
+
+	//colliion points
+	int upX = main.x + cam.WorldX + (main.width / 2);
+	upX = cam.InfiniteX(upX);
+	int upY = main.y + cam.WorldY - moveSpeed;
+	upY = cam.InfiniteY(upY);
+
+	int downX = main.x + cam.WorldX + (main.width / 2);
+	downX = cam.InfiniteX(downX);
+	int downY = main.y + cam.WorldY + main.height + moveSpeed;
+	downY = cam.InfiniteY(downY);
+
+
+	int leftX = main.x + cam.WorldX + 40 + moveSpeed;
+	leftX = cam.InfiniteX(leftX);
+	int left1Y = main.y + cam.WorldY + 10;
+	left1Y = cam.InfiniteY(left1Y);
+	int left2Y = main.y + cam.WorldY + 50;
+	left2Y = cam.InfiniteY(left2Y);
+
+	int rightX = main.x + cam.WorldX + 10;// -moveSpeed;
+	rightX = cam.InfiniteX(rightX);
+	int right1y = main.y + cam.WorldY + 10;
+	right1y = cam.InfiniteY(right1y);
+	int right2Y = main.y + cam.WorldY + 50;
+	right2Y = cam.InfiniteY(right2Y);
 
 	if (Y < 0 && !ww.passable(upX, upY))
 		return false;

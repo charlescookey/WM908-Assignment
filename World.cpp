@@ -8,6 +8,11 @@
 World::World() {
 }
 
+World::World(int x, int y) {
+	rows = x;
+	cols = y;
+}
+
 
 World::~World() {
 	for (int i = 0; i < rows; ++i) {

@@ -13,6 +13,11 @@ public:
 	/// Default Constructor
 	/// </summary>
 	World();
+	
+	/// <summary>
+	/// Default Constructor
+	/// </summary>
+	World(int x, int y);
 
 	int** arr;
 	/// <summary>

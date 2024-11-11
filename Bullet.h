@@ -26,6 +26,14 @@ public:
 	/// <returns>string output</returns>
 	std::string SaveBullet();
 	/// <summary>
+	/// Sets the properties of the bullet
+	/// </summary>
+	/// <param name="dirX">Direction X</param>
+	/// <param name="dirY">Direction X</param>
+	/// <param name="X">Position X</param>
+	/// <param name="Y">Position Y</param>
+	void setProperties(float dirX, float dirY, int X, int Y);
+	/// <summary>
 	/// Gets the direction to travel to from origin to destination
 	/// </summary>
 	/// <param name="pp">Origin Character</param>

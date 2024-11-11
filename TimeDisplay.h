@@ -24,6 +24,12 @@ public:
 	TimeDisplay(int _x, int _y, int _scale);
 
 	/// <summary>
+	/// Sets the seconds variable
+	/// </summary>
+	/// <param name="seconds">input time</param>
+	void setSeconds(float seconds);
+
+	/// <summary>
 	/// Update the seconds
 	/// </summary>
 	/// <param name="dt">Time since last update</param>
@@ -39,6 +45,11 @@ public:
 	/// </summary>
 	/// <param name="canvas">canavs to draw to</param>
 	void draw(GamesEngineeringBase::Window& canvas);
+	/// <summary>
+	/// Save Opponent
+	/// </summary>
+	/// <returns>string ouput</returns>
+	std::string SaveTime();
 
 };
 

@@ -17,6 +17,7 @@ std::string BulletManager::SaveBullet() {
 		if (bullets[i]->fired) {
 			result += bullets[i]->SaveBullet();
 		}
+	result += "DONE\n";
 	return result;
 }
 

@@ -12,6 +12,15 @@ TimeDisplay::TimeDisplay() {
 TimeDisplay::TimeDisplay(int _x, int _y, int _scale) :X(_x), Y(_y), scale(_scale) {
 }
 
+void TimeDisplay::setSeconds(float seconds) {
+	_seconds = seconds;
+}
+
+std::string TimeDisplay::SaveTime() {
+	std::string result;
+	result += "Time: " + std::to_string(_seconds)  + " \n";
+	return result;
+}
 
 void TimeDisplay::update(float dt) {
 	_seconds += dt;
