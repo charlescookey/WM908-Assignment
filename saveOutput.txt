@@ -1,5 +1,5 @@
-Camera: 1877 1550 1024 768
-Hero: 512 384 95 100 15 120
+Camera: 669 580 1024 768
+Hero: 512 384 100 100 15 0
 Bullets: 
 DONE
 Horde: 
@@ -7,4 +7,4 @@ DONE
 
 Bullets: 
 DONE
-Time: 50.728138 
+Time: 2.191643 
