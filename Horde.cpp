@@ -199,10 +199,10 @@ void Horde::AreaofEffect(Hero& hero, Camera& cam) {
 Opponent* Horde::createNewEnemy(Camera& cam, int i) {
 
 	//just as a test			  cleric1.png
-	Opponent Brazy(300, 5, ImageIndex::CharacterCleric, 0);
-	Opponent Killer(200, 20, ImageIndex::CharacterWarrior, 1);
-	Opponent Robot(150, 10, ImageIndex::CharcaterMinoutaur, 2);
-	Opponent Shock(205, 15, ImageIndex::CharacterOrc, 3);
+	Opponent Brazy(120, 5, ImageIndex::CharacterCleric, 0);
+	Opponent Killer(100, 20, ImageIndex::CharacterWarrior, 1);
+	Opponent Robot(110, 10, ImageIndex::CharcaterMinoutaur, 2);
+	Opponent Shock(105, 15, ImageIndex::CharacterOrc, 3);
 	Opponent Stagnant(2, 15, ImageIndex::CharacterOrc, 4);
 
 	int index = rand() % 5;
@@ -249,10 +249,10 @@ Opponent* Horde::createNewEnemy(Camera& cam, int i) {
 Opponent* Horde::createOldEnemy(int index, int X, int Y, std::string debugname) {
 
 	//just as a test			  cleric1.png
-	Opponent Brazy(300, 5, ImageIndex::CharacterCleric, 0);
-	Opponent Killer(200, 20, ImageIndex::CharacterWarrior, 1);
-	Opponent Robot(150, 10, ImageIndex::CharcaterMinoutaur, 2);
-	Opponent Shock(205, 15, ImageIndex::CharacterOrc, 3);
+	Opponent Brazy(120, 5, ImageIndex::CharacterCleric, 0);
+	Opponent Killer(100, 20, ImageIndex::CharacterWarrior, 1);
+	Opponent Robot(110, 10, ImageIndex::CharcaterMinoutaur, 2);
+	Opponent Shock(105, 15, ImageIndex::CharacterOrc, 3);
 	Opponent Stagnant(2, 15, ImageIndex::CharacterOrc, 4);
 
 	switch (index) {

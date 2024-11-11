@@ -362,15 +362,12 @@ int fixedLevel(GamesEngineeringBase::Window& canvas, bool loadlastSave) {
 		float dt = tim.dt();
 		int move = static_cast<int>(100.f * dt);
 
-		std::cout << move << "\n";
-
 		timedisplay.update(dt);
 
 		FPStimeELapsed += dt;
 		frameCount++;
 		if (FPStimeELapsed > 1.f) {
 			FPS = frameCount / FPStimeELapsed;
-			std::cout << "FPS: " << FPS << "\n";
 			FPStimeELapsed = 0;
 			frameCount = 0;
 		}
@@ -378,7 +375,6 @@ int fixedLevel(GamesEngineeringBase::Window& canvas, bool loadlastSave) {
 		if (hero.getScore() >= nextScoreLevel) {
 			int Y = cam.WorldY + (rand() % cam.height);
 			int X = cam.WorldX + (rand() % cam.width);
-			std::cout << "New Pickup has been added at" << X << " " << Y << "\n";
 			nextScoreLevel += 100;
 			Pickup* pickup = new Pickup(3, X, Y);
 			pickup->setImageWidthAndHeight(cam.gallery.getImageWidthAndHeight(pickup->pickup.imageindex));
@@ -468,7 +464,6 @@ int infiniteLevel(GamesEngineeringBase::Window& canvas) {
 		float dt = tim.dt();
 		int move = static_cast<int>(100.f * dt);
 
-		std::cout << move << "\n";
 
 		timedisplay.update(dt);
 
@@ -476,7 +471,7 @@ int infiniteLevel(GamesEngineeringBase::Window& canvas) {
 		frameCount++;
 		if (FPStimeELapsed > 1.f) {
 			FPS = frameCount / FPStimeELapsed;
-			std::cout << "FPS: " << FPS << "\n";
+
 			FPStimeELapsed = 0;
 			frameCount = 0;
 		}
@@ -484,7 +479,6 @@ int infiniteLevel(GamesEngineeringBase::Window& canvas) {
 		if (hero.getScore() >= nextScoreLevel) {
 			int Y = cam.WorldY + (rand() % cam.height);
 			int X = cam.WorldX + (rand() % cam.width);
-			std::cout << "New Pickup has been added at" << X << " " << Y << "\n";
 			nextScoreLevel += 100;
 			Pickup* pickup = new Pickup(3, X, Y);
 			pickup->setImageWidthAndHeight(cam.gallery.getImageWidthAndHeight(pickup->pickup.imageindex));

@@ -3,7 +3,7 @@
 #include "DrawHelp.h"
 
 Hero::Hero(int x, int y) {
-	movespeed = 500;
+	movespeed = 200;
 	maxHealth = 100;
 	currHealth = maxHealth;
 
